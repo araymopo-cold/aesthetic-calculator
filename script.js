@@ -3,31 +3,23 @@
 ========================================== */
 
 
-/*
-    SPECIAL EQUATIONS
+/* ==========================================
+   SPECIAL EQUATIONS
 
-    10 + 8 = 18
-    → Sino — IV of Spades
+   10 + 8 = 18
+   → Sino — IV of Spades
 
-    2 + 2 = 4
-    → Pag-Ibig — Ace Banzuelo
-*/
-
+   2 + 2 = 4
+   → Pag-Ibig — Ace Banzuelo
+========================================== */
 
 const songs = {
 
     "18": {
         title: "Sino",
         artist: "IV of Spades",
-
-        /*
-            Put your authorized audio file here.
-        */
         audio: "music/sino.mp3",
 
-        /*
-            Put your authorized lyrics here.
-        */
         lyrics: [
             "Your authorized lyrics go here.",
             "",
@@ -40,7 +32,6 @@ const songs = {
     "4": {
         title: "Pag-Ibig",
         artist: "Ace Banzuelo",
-
         audio: "music/pag-ibig.mp3",
 
         lyrics: [
@@ -67,38 +58,22 @@ const songs = {
 
 
 /* ==========================================
-   ELEMENTS
+   GET ELEMENTS
 ========================================== */
 
-const currentDisplay =
-    document.getElementById("currentDisplay");
+const currentDisplay = document.getElementById("currentDisplay");
+const previousDisplay = document.getElementById("previousDisplay");
 
-const previousDisplay =
-    document.getElementById("previousDisplay");
+const buttons = document.querySelectorAll(".buttons button");
 
-const buttons =
-    document.querySelectorAll("button");
+const songTitle = document.getElementById("songTitle");
+const artistName = document.getElementById("artistName");
+const lyrics = document.getElementById("lyrics");
+const audioPlayer = document.getElementById("audioPlayer");
+const musicCard = document.getElementById("musicCard");
 
-const songTitle =
-    document.getElementById("songTitle");
-
-const artistName =
-    document.getElementById("artistName");
-
-const lyrics =
-    document.getElementById("lyrics");
-
-const audioPlayer =
-    document.getElementById("audioPlayer");
-
-const musicCard =
-    document.getElementById("musicCard");
-
-const notification =
-    document.getElementById("notification");
-
-const notificationText =
-    document.getElementById("notificationText");
+const notification = document.getElementById("notification");
+const notificationText = document.getElementById("notificationText");
 
 
 /* ==========================================
@@ -108,7 +83,6 @@ const notificationText =
 let currentNumber = "";
 let previousNumber = "";
 let operation = null;
-
 let justCalculated = false;
 
 
@@ -118,10 +92,10 @@ let justCalculated = false;
 
 buttons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", function () {
 
-        const value = button.dataset.value;
-        const action = button.dataset.action;
+        const value = this.dataset.value;
+        const action = this.dataset.action;
 
 
         /* NUMBER / DECIMAL */
@@ -151,21 +125,15 @@ buttons.forEach(button => {
         /* ACTIONS */
 
         if (action === "clear") {
-
             clearCalculator();
-
         }
 
         if (action === "delete") {
-
             deleteNumber();
-
         }
 
         if (action === "equals") {
-
             calculate();
-
         }
 
     });
@@ -179,11 +147,7 @@ buttons.forEach(button => {
 
 function addNumber(number) {
 
-    /*
-        If a calculation was just completed
-        and the user types a number, start
-        a new calculation.
-    */
+    /* Start new calculation after result */
 
     if (justCalculated) {
 
@@ -196,9 +160,7 @@ function addNumber(number) {
     }
 
 
-    /*
-        Prevent multiple decimal points.
-    */
+    /* Prevent multiple decimal points */
 
     if (
         number === "." &&
@@ -210,9 +172,7 @@ function addNumber(number) {
     }
 
 
-    /*
-        Prevent numbers such as 0005.
-    */
+    /* Prevent 0005 */
 
     if (
         currentNumber === "0" &&
@@ -237,10 +197,6 @@ function addNumber(number) {
 
 function chooseOperation(op) {
 
-    /*
-        Do nothing if there is no number.
-    */
-
     if (
         currentNumber === "" &&
         previousNumber === ""
@@ -251,10 +207,7 @@ function chooseOperation(op) {
     }
 
 
-    /*
-        If there is already an equation,
-        calculate it first.
-    */
+    /* Calculate existing equation first */
 
     if (
         previousNumber !== "" &&
@@ -266,22 +219,15 @@ function chooseOperation(op) {
     }
 
 
-    /*
-        Store the current number as
-        the first number.
-    */
-
     if (currentNumber !== "") {
 
         previousNumber = currentNumber;
-
         currentNumber = "";
 
     }
 
 
     operation = op;
-
     justCalculated = false;
 
     updateDisplay();
@@ -295,10 +241,6 @@ function chooseOperation(op) {
 
 function calculate() {
 
-    /*
-        Make sure we have everything needed.
-    */
-
     if (
         previousNumber === "" ||
         currentNumber === "" ||
@@ -310,18 +252,11 @@ function calculate() {
     }
 
 
-    const first =
-        parseFloat(previousNumber);
-
-    const second =
-        parseFloat(currentNumber);
+    const first = parseFloat(previousNumber);
+    const second = parseFloat(currentNumber);
 
     let result;
 
-
-    /* ======================================
-       MATHEMATICAL OPERATIONS
-    ====================================== */
 
     switch (operation) {
 
@@ -348,10 +283,6 @@ function calculate() {
 
         case "/":
 
-            /*
-                Prevent division by zero.
-            */
-
             if (second === 0) {
 
                 currentNumber = "ERROR";
@@ -359,6 +290,8 @@ function calculate() {
                 operation = null;
 
                 updateDisplay();
+
+                showNotification("Cannot divide by zero.");
 
                 return;
 
@@ -383,39 +316,24 @@ function calculate() {
     }
 
 
-    /*
-        Remove ugly floating-point errors.
-
-        Example:
-        0.1 + 0.2
-
-        becomes:
-        0.3
-    */
+    /* Fix floating point errors */
 
     result =
         Math.round(result * 100000000) /
         100000000;
 
 
-    /*
-        Save the equation for the
-        previous display.
-    */
+    /* Save equation */
 
     const equation =
         `${previousNumber} ${displayOperation(operation)} ${currentNumber}`;
 
 
-    /*
-        Store result.
-    */
+    /* Save result */
 
-    currentNumber =
-        String(result);
+    currentNumber = String(result);
 
-    previousNumber =
-        equation;
+    previousNumber = equation;
 
     operation = null;
 
@@ -425,14 +343,9 @@ function calculate() {
     updateDisplay();
 
 
-    /*
-        Check if this result unlocks
-        a special song.
-    */
+    /* Check special song */
 
-    playSpecialSong(
-        String(result)
-    );
+    playSpecialSong(String(result));
 
 }
 
@@ -443,65 +356,42 @@ function calculate() {
 
 function playSpecialSong(result) {
 
-    const song =
-        songs[result];
+    const song = songs[result];
 
 
-    /*
-        No special song for this result.
-    */
+    /* No special song */
 
     if (!song) {
 
-        showNotification(
-            `Result: ${result}`
-        );
+        showNotification(`Result: ${result}`);
 
         return;
 
     }
 
 
-    /* ======================================
-       SONG INFORMATION
-    ====================================== */
+    /* SONG INFO */
 
-    songTitle.textContent =
-        song.title;
-
-    artistName.textContent =
-        song.artist;
+    songTitle.textContent = song.title;
+    artistName.textContent = song.artist;
 
 
-    /* ======================================
-       LYRICS
-    ====================================== */
+    /* LYRICS */
 
     lyrics.innerHTML = "";
 
-
     song.lyrics.forEach(line => {
 
-        const p =
-            document.createElement("p");
-
-
-        /*
-            Special formatting for
-            [Pre-Chorus] and [Chorus].
-        */
+        const p = document.createElement("p");
 
         if (
             line === "[Pre-Chorus]" ||
             line === "[Chorus]"
         ) {
 
-            p.classList.add(
-                "lyrics-section"
-            );
+            p.classList.add("lyrics-section");
 
         }
-
 
         p.textContent = line;
 
@@ -510,51 +400,36 @@ function playSpecialSong(result) {
     });
 
 
-    /* ======================================
-       AUDIO
-    ====================================== */
+    /* AUDIO */
 
-    audioPlayer.src =
-        song.audio;
-
+    audioPlayer.src = song.audio;
     audioPlayer.load();
 
 
     /*
-        Try to automatically play.
+        Browsers may block autoplay.
+        The audio controls will still work.
     */
 
-    audioPlayer.play()
-        .catch(() => {
+    audioPlayer.play().catch(() => {
 
-            showNotification(
-                "Press ▶ to play the song"
-            );
+        showNotification("Press ▶ to play the song.");
 
-        });
+    });
 
 
-    /* ======================================
-       MUSIC CARD EFFECT
-    ====================================== */
+    /* MUSIC CARD EFFECT */
 
-    musicCard.classList.add(
-        "active"
-    );
-
+    musicCard.classList.add("active");
 
     setTimeout(() => {
 
-        musicCard.classList.remove(
-            "active"
-        );
+        musicCard.classList.remove("active");
 
     }, 2500);
 
 
-    /* ======================================
-       NOTIFICATION
-    ====================================== */
+    /* NOTIFICATION */
 
     showNotification(
         `♫ ${song.title} unlocked!`
@@ -564,14 +439,13 @@ function playSpecialSong(result) {
 
 
 /* ==========================================
-   DISPLAY
+   UPDATE DISPLAY
 ========================================== */
 
 function updateDisplay() {
 
     currentDisplay.textContent =
         currentNumber || "0";
-
 
     previousDisplay.textContent =
         previousNumber;
@@ -595,7 +469,6 @@ function displayOperation(op) {
 
     };
 
-
     return symbols[op] || op;
 
 }
@@ -608,13 +481,9 @@ function displayOperation(op) {
 function clearCalculator() {
 
     currentNumber = "";
-
     previousNumber = "";
-
     operation = null;
-
     justCalculated = false;
-
 
     updateDisplay();
 
@@ -626,11 +495,6 @@ function clearCalculator() {
 ========================================== */
 
 function deleteNumber() {
-
-    /*
-        If the user deletes after a
-        calculation, clear everything.
-    */
 
     if (justCalculated) {
 
@@ -644,7 +508,6 @@ function deleteNumber() {
     currentNumber =
         currentNumber.slice(0, -1);
 
-
     updateDisplay();
 
 }
@@ -656,31 +519,22 @@ function deleteNumber() {
 
 let notificationTimer;
 
-
 function showNotification(message) {
 
     notificationText.textContent =
         message;
 
-
-    notification.classList.add(
-        "show"
-    );
+    notification.classList.add("show");
 
 
-    clearTimeout(
-        notificationTimer
-    );
+    clearTimeout(notificationTimer);
 
 
-    notificationTimer =
-        setTimeout(() => {
+    notificationTimer = setTimeout(() => {
 
-            notification.classList.remove(
-                "show"
-            );
+        notification.classList.remove("show");
 
-        }, 2200);
+    }, 2200);
 
 }
 
@@ -689,72 +543,76 @@ function showNotification(message) {
    KEYBOARD SUPPORT
 ========================================== */
 
-document.addEventListener(
-    "keydown",
-    event => {
+document.addEventListener("keydown", event => {
 
-        const key =
-            event.key;
+    const key = event.key;
 
 
-        /* NUMBER / DECIMAL */
+    /* NUMBERS */
 
-        if (
-            !isNaN(key) ||
-            key === "."
-        ) {
+    if (
+        !isNaN(key) ||
+        key === "."
+    ) {
 
-            addNumber(key);
-
-        }
-
-
-        /* OPERATORS */
-
-        else if (
-            ["+", "-", "*", "/", "%"]
-                .includes(key)
-        ) {
-
-            chooseOperation(key);
-
-        }
-
-
-        /* ENTER / EQUALS */
-
-        else if (
-            key === "Enter" ||
-            key === "="
-        ) {
-
-            event.preventDefault();
-
-            calculate();
-
-        }
-
-
-        /* BACKSPACE */
-
-        else if (
-            key === "Backspace"
-        ) {
-
-            deleteNumber();
-
-        }
-
-
-        /* ESCAPE */
-
-        else if (
-            key === "Escape"
-        ) {
-
-            clearCalculator();
-
-        }
+        addNumber(key);
 
     }
-);
+
+
+    /* OPERATORS */
+
+    else if (
+        ["+", "-", "*", "/", "%"].includes(key)
+    ) {
+
+        chooseOperation(key);
+
+    }
+
+
+    /* ENTER / EQUALS */
+
+    else if (
+        key === "Enter" ||
+        key === "="
+    ) {
+
+        event.preventDefault();
+
+        calculate();
+
+    }
+
+
+    /* BACKSPACE */
+
+    else if (
+        key === "Backspace"
+    ) {
+
+        deleteNumber();
+
+    }
+
+
+    /* ESCAPE */
+
+    else if (
+        key === "Escape"
+    ) {
+
+        clearCalculator();
+
+    }
+
+});
+
+
+/* ==========================================
+   INITIAL DISPLAY
+========================================== */
+
+updateDisplay();
+
+console.log("🌌 Cosmic Calculator loaded successfully!");
