@@ -38,19 +38,18 @@ const songs = {
         ]
     },
 
-    "4": {
-        title: "Na Para Bang",
-        artist: "Mariah Deborah",
+   "4": {
+    title: "Pag-Ibig",
+    artist: "Ace Banzuelo",
+    audio: "music/pag-ibig.mp3",
 
-        audio: "music/na-para-bang.mp3",
-
-        lyrics: [
-            "Your authorized lyrics go here.",
-            "",
-            "Replace this text with lyrics",
-            "you have permission to use."
-        ]
-    }
+    lyrics: [
+        "YOUR AUTHORIZED LYRIC LINE 1",
+        "YOUR AUTHORIZED LYRIC LINE 2",
+        "YOUR AUTHORIZED LYRIC LINE 3",
+        "YOUR AUTHORIZED LYRIC LINE 4"
+    ]
+}
 
 };
 
