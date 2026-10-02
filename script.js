@@ -38,19 +38,19 @@ const songs = {
             "Pero ’di ba sabi mo kung meron man nagpaparamdam",
             "Nilalayo ang sarili, ayaw matulad sa dati",
 
-            "[Pre-Chorus]",
+        
 
             "'Di ko alam ang dapat sabihin",
             "'Di ko alam ang dapat aminin",
-            "’Di ko alam kung kailan, paano (Paano?)",
+            "’Di ko alam kung kailan, paano",
             "Nalimutang pag-ibig, meron bang pipili sa'kin?",
 
-            "[Chorus]",
+            
 
-            "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
-            "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
-            "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
-            "(Ha-ah) Meron ba? Meron ba? Oh-oh"
+            "Meron ba? Meron ba? Meron bang pipili sa'kin?",
+            "Meron ba? Meron ba? Meron bang pipili sa'kin?",
+            "Meron ba? Meron ba? Meron bang pipili sa'kin?",
+            "Meron ba? Meron ba? Oh-oh"
         ]
     }
 
