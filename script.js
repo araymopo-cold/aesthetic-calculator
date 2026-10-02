@@ -1,6 +1,5 @@
 /* ==========================================
-   CO
-SMIC CALCULATOR
+   COSMIC CALCULATOR
 ========================================== */
 
 
@@ -11,9 +10,8 @@ SMIC CALCULATOR
     → Sino — IV of Spades
 
     2 + 2 = 4
-    → Pag-Ibig — Ace Banzuelo
+    → Na Para Bang — Mariah Deborah
 */
-
 
 const songs = {
 
@@ -23,6 +21,9 @@ const songs = {
 
         /*
             Put your authorized audio file here.
+            Example:
+
+            music/sino.mp3
         */
         audio: "music/sino.mp3",
 
@@ -37,30 +38,17 @@ const songs = {
         ]
     },
 
-
     "4": {
-        title: "Pag-Ibig",
-        artist: "Ace Banzuelo",
+        title: "Na Para Bang",
+        artist: "Mariah Deborah",
 
-        audio: "music/pag-ibig.mp3",
+        audio: "music/na-para-bang.mp3",
 
         lyrics: [
-            "Pero ’di ba sabi mo kung meron man nagpaparamdam",
-            "Nilalayo ang sarili, ayaw matulad sa dati",
-
-            "[Pre-Chorus]",
-
-            "'Di ko alam ang dapat sabihin",
-            "'Di ko alam ang dapat aminin",
-            "’Di ko alam kung kailan, paano (Paano?)",
-            "Nalimutang pag-ibig, meron bang pipili sa'kin?",
-
-            "[Chorus]",
-
-            "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
-            "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
-            "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
-            "(Ha-ah) Meron ba? Meron ba? Oh-oh"
+            "Your authorized lyrics go here.",
+            "",
+            "Replace this text with lyrics",
+            "you have permission to use."
         ]
     }
 
@@ -133,17 +121,13 @@ buttons.forEach(button => {
                 !isNaN(value) ||
                 value === "."
             ) {
-
                 addNumber(value);
-
             }
 
             else if (
                 ["+", "-", "*", "/", "%"].includes(value)
             ) {
-
                 chooseOperation(value);
-
             }
 
         }
@@ -152,21 +136,15 @@ buttons.forEach(button => {
         /* ACTIONS */
 
         if (action === "clear") {
-
             clearCalculator();
-
         }
 
         if (action === "delete") {
-
             deleteNumber();
-
         }
 
         if (action === "equals") {
-
             calculate();
-
         }
 
     });
@@ -180,55 +158,34 @@ buttons.forEach(button => {
 
 function addNumber(number) {
 
-    /*
-        If a calculation was just completed
-        and the user types a number, start
-        a new calculation.
-    */
-
     if (justCalculated) {
-
         currentNumber = "";
         previousNumber = "";
         operation = null;
 
         justCalculated = false;
-
     }
 
-
-    /*
-        Prevent multiple decimal points.
-    */
 
     if (
         number === "." &&
         currentNumber.includes(".")
     ) {
-
         return;
-
     }
 
-
-    /*
-        Prevent numbers such as 0005.
-    */
 
     if (
         currentNumber === "0" &&
         number !== "."
     ) {
-
         currentNumber = "";
-
     }
 
 
     currentNumber += number;
 
     updateDisplay();
-
 }
 
 
@@ -238,39 +195,18 @@ function addNumber(number) {
 
 function chooseOperation(op) {
 
-    /*
-        Do nothing if there is no number.
-    */
-
-    if (
-        currentNumber === "" &&
-        previousNumber === ""
-    ) {
-
+    if (currentNumber === "" && previousNumber === "") {
         return;
-
     }
 
-
-    /*
-        If there is already an equation,
-        calculate it first.
-    */
 
     if (
         previousNumber !== "" &&
         currentNumber !== ""
     ) {
-
         calculate();
-
     }
 
-
-    /*
-        Store the current number as
-        the first number.
-    */
 
     if (currentNumber !== "") {
 
@@ -286,7 +222,6 @@ function chooseOperation(op) {
     justCalculated = false;
 
     updateDisplay();
-
 }
 
 
@@ -296,62 +231,36 @@ function chooseOperation(op) {
 
 function calculate() {
 
-    /*
-        Make sure we have everything needed.
-    */
-
     if (
         previousNumber === "" ||
         currentNumber === "" ||
         operation === null
     ) {
-
         return;
-
     }
 
 
-    const first =
-        parseFloat(previousNumber);
-
-    const second =
-        parseFloat(currentNumber);
+    const first = parseFloat(previousNumber);
+    const second = parseFloat(currentNumber);
 
     let result;
 
 
-    /* ======================================
-       MATHEMATICAL OPERATIONS
-    ====================================== */
-
     switch (operation) {
 
         case "+":
-
             result = first + second;
-
             break;
-
 
         case "-":
-
             result = first - second;
-
             break;
-
 
         case "*":
-
             result = first * second;
-
             break;
 
-
         case "/":
-
-            /*
-                Prevent division by zero.
-            */
 
             if (second === 0) {
 
@@ -362,61 +271,33 @@ function calculate() {
                 updateDisplay();
 
                 return;
-
             }
 
             result = first / second;
 
             break;
 
-
         case "%":
-
             result = first % second;
-
             break;
 
-
         default:
-
             return;
-
     }
 
 
-    /*
-        Remove ugly floating-point errors.
+    /* Remove ugly decimal floating errors */
 
-        Example:
-        0.1 + 0.2
+    result = Math.round(result * 100000000) / 100000000;
 
-        becomes:
-        0.3
-    */
-
-    result =
-        Math.round(result * 100000000) /
-        100000000;
-
-
-    /*
-        Save the equation for the
-        previous display.
-    */
 
     const equation =
         `${previousNumber} ${displayOperation(operation)} ${currentNumber}`;
 
 
-    /*
-        Store result.
-    */
+    currentNumber = String(result);
 
-    currentNumber =
-        String(result);
-
-    previousNumber =
-        equation;
+    previousNumber = equation;
 
     operation = null;
 
@@ -431,9 +312,7 @@ function calculate() {
         a special song.
     */
 
-    playSpecialSong(
-        String(result)
-    );
+    playSpecialSong(String(result));
 
 }
 
@@ -444,13 +323,8 @@ function calculate() {
 
 function playSpecialSong(result) {
 
-    const song =
-        songs[result];
+    const song = songs[result];
 
-
-    /*
-        No special song for this result.
-    */
 
     if (!song) {
 
@@ -459,13 +333,8 @@ function playSpecialSong(result) {
         );
 
         return;
-
     }
 
-
-    /* ======================================
-       SONG INFORMATION
-    ====================================== */
 
     songTitle.textContent =
         song.title;
@@ -474,9 +343,7 @@ function playSpecialSong(result) {
         song.artist;
 
 
-    /* ======================================
-       LYRICS
-    ====================================== */
+    /* LYRICS */
 
     lyrics.innerHTML = "";
 
@@ -486,24 +353,6 @@ function playSpecialSong(result) {
         const p =
             document.createElement("p");
 
-
-        /*
-            Special formatting for
-            [Pre-Chorus] and [Chorus].
-        */
-
-        if (
-            line === "[Pre-Chorus]" ||
-            line === "[Chorus]"
-        ) {
-
-            p.classList.add(
-                "lyrics-section"
-            );
-
-        }
-
-
         p.textContent = line;
 
         lyrics.appendChild(p);
@@ -511,9 +360,7 @@ function playSpecialSong(result) {
     });
 
 
-    /* ======================================
-       AUDIO
-    ====================================== */
+    /* AUDIO */
 
     audioPlayer.src =
         song.audio;
@@ -522,7 +369,12 @@ function playSpecialSong(result) {
 
 
     /*
-        Try to automatically play.
+        Browsers can block autoplay
+        in some situations.
+
+        Because this happens after a
+        calculator button click, it
+        will normally be allowed.
     */
 
     audioPlayer.play()
@@ -535,27 +387,17 @@ function playSpecialSong(result) {
         });
 
 
-    /* ======================================
-       MUSIC CARD EFFECT
-    ====================================== */
+    /* CARD EFFECT */
 
-    musicCard.classList.add(
-        "active"
-    );
+    musicCard.classList.add("active");
 
 
     setTimeout(() => {
 
-        musicCard.classList.remove(
-            "active"
-        );
+        musicCard.classList.remove("active");
 
     }, 2500);
 
-
-    /* ======================================
-       NOTIFICATION
-    ====================================== */
 
     showNotification(
         `♫ ${song.title} unlocked!`
@@ -576,7 +418,6 @@ function updateDisplay() {
 
     previousDisplay.textContent =
         previousNumber;
-
 }
 
 
@@ -596,9 +437,7 @@ function displayOperation(op) {
 
     };
 
-
     return symbols[op] || op;
-
 }
 
 
@@ -609,13 +448,10 @@ function displayOperation(op) {
 function clearCalculator() {
 
     currentNumber = "";
-
     previousNumber = "";
-
     operation = null;
 
     justCalculated = false;
-
 
     updateDisplay();
 
@@ -628,17 +464,9 @@ function clearCalculator() {
 
 function deleteNumber() {
 
-    /*
-        If the user deletes after a
-        calculation, clear everything.
-    */
-
     if (justCalculated) {
-
         clearCalculator();
-
         return;
-
     }
 
 
@@ -647,7 +475,6 @@ function deleteNumber() {
 
 
     updateDisplay();
-
 }
 
 
@@ -657,29 +484,21 @@ function deleteNumber() {
 
 let notificationTimer;
 
-
 function showNotification(message) {
 
     notificationText.textContent =
         message;
 
-
-    notification.classList.add(
-        "show"
-    );
+    notification.classList.add("show");
 
 
-    clearTimeout(
-        notificationTimer
-    );
+    clearTimeout(notificationTimer);
 
 
     notificationTimer =
         setTimeout(() => {
 
-            notification.classList.remove(
-                "show"
-            );
+            notification.classList.remove("show");
 
         }, 2200);
 
@@ -690,72 +509,53 @@ function showNotification(message) {
    KEYBOARD SUPPORT
 ========================================== */
 
-document.addEventListener(
-    "keydown",
-    event => {
+document.addEventListener("keydown", event => {
 
-        const key =
-            event.key;
+    const key = event.key;
 
 
-        /* NUMBER / DECIMAL */
+    if (
+        !isNaN(key) ||
+        key === "."
+    ) {
 
-        if (
-            !isNaN(key) ||
-            key === "."
-        ) {
-
-            addNumber(key);
-
-        }
-
-
-        /* OPERATORS */
-
-        else if (
-            ["+", "-", "*", "/", "%"]
-                .includes(key)
-        ) {
-
-            chooseOperation(key);
-
-        }
-
-
-        /* ENTER / EQUALS */
-
-        else if (
-            key === "Enter" ||
-            key === "="
-        ) {
-
-            event.preventDefault();
-
-            calculate();
-
-        }
-
-
-        /* BACKSPACE */
-
-        else if (
-            key === "Backspace"
-        ) {
-
-            deleteNumber();
-
-        }
-
-
-        /* ESCAPE */
-
-        else if (
-            key === "Escape"
-        ) {
-
-            clearCalculator();
-
-        }
+        addNumber(key);
 
     }
-);
+
+
+    else if (
+        ["+", "-", "*", "/", "%"].includes(key)
+    ) {
+
+        chooseOperation(key);
+
+    }
+
+
+    else if (
+        key === "Enter" ||
+        key === "="
+    ) {
+
+        event.preventDefault();
+
+        calculate();
+
+    }
+
+
+    else if (key === "Backspace") {
+
+        deleteNumber();
+
+    }
+
+
+    else if (key === "Escape") {
+
+        clearCalculator();
+
+    }
+
+});
