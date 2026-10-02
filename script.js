@@ -38,18 +38,21 @@ const songs = {
         ]
     },
 
-   "4": {
-    title: "Pag-Ibig",
-    artist: "Ace Banzuelo",
-    audio: "music/pag-ibig.mp3",
-
-    lyrics: [
-        "YOUR AUTHORIZED LYRIC LINE 1",
-        "YOUR AUTHORIZED LYRIC LINE 2",
-        "YOUR AUTHORIZED LYRIC LINE 3",
-        "YOUR AUTHORIZED LYRIC LINE 4"
-    ]
-}
+  "4": { title: "Pag-Ibig",  
+      artist: "Ace Banzuelo", 
+      audio: "music/pag-ibig.mp3", 
+        lyrics: [ "Pero ’di ba sabi mo kung meron man nagpaparamdam",
+         "Nilalayo ang sarili, ayaw matulad sa dati", "[Pre-Chorus]",
+         "'Di ko alam ang dapat sabihin",
+         "'Di ko alam ang dapat aminin", 
+         "’Di ko alam kung kailan,
+         paano (Paano?)",
+         "Nalimutang pag-ibig,
+         meron bang pipili sa'kin?",
+      "[Chorus]", "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
+      "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
+                 "(Ha-ah) Meron ba? Meron ba? Meron bang pipili sa'kin?",
+                 "(Ha-ah) Meron ba? Meron ba? Oh-oh" ] },
 
 };
 
