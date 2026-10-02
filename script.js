@@ -1,5 +1,6 @@
 /* ==========================================
-   COSMIC CALCULATOR
+   CO
+SMIC CALCULATOR
 ========================================== */
 
 
@@ -753,4 +754,8 @@ document.addEventListener(
         ) {
 
             clearCalculator();
-```
+
+        }
+
+    }
+);
