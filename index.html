@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cosmic Calculator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SPACE BACKGROUND -->
+    <div class="space">
+        <div class="stars"></div>
+
+        <div class="planet planet-one"></div>
+        <div class="planet planet-two"></div>
+
+        <div class="floating-object object-one">✦</div>
+        <div class="floating-object object-two">✧</div>
+        <div class="floating-object object-three">◆</div>
+        <div class="floating-object object-four">✦</div>
+    </div>
+
+    <!-- MAIN PAGE -->
+    <main class="container">
+
+        <section class="calculator-card">
+
+            <div class="calculator-header">
+                <span>✦</span>
+                <h1>COSMIC CALC</h1>
+                <span>✦</span>
+            </div>
+
+            <!-- DISPLAY -->
+            <div class="display">
+                <div id="previousDisplay"></div>
+                <div id="currentDisplay">0</div>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="buttons">
+
+                <button class="function" data-action="clear">C</button>
+                <button class="function" data-action="delete">DEL</button>
+                <button class="operator" data-value="%">%</button>
+                <button class="operator" data-value="/">÷</button>
+
+                <button data-value="7">7</button>
+                <button data-value="8">8</button>
+                <button data-value="9">9</button>
+                <button class="operator" data-value="*">×</button>
+
+                <button data-value="4">4</button>
+                <button data-value="5">5</button>
+                <button data-value="6">6</button>
+                <button class="operator" data-value="-">−</button>
+
+                <button data-value="1">1</button>
+                <button data-value="2">2</button>
+                <button data-value="3">3</button>
+                <button class="operator" data-value="+">+</button>
+
+                <button class="zero" data-value="0">0</button>
+                <button data-value=".">.</button>
+                <button class="equals" data-action="equals">=</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MUSIC / LYRICS PANEL -->
+        <section class="music-card" id="musicCard">
+
+            <div class="music-header">
+                <div>
+                    <p class="small-label">NOW PLAYING</p>
+                    <h2 id="songTitle">No song selected</h2>
+                    <p id="artistName">Calculate something...</p>
+                </div>
+
+                <div class="music-icon">♫</div>
+            </div>
+
+            <div class="album-art" id="albumArt">
+                <span>✦</span>
+            </div>
+
+            <audio id="audioPlayer" controls></audio>
+
+            <div class="lyrics-box">
+                <div class="lyrics-title">✧ LYRICS ✧</div>
+
+                <div id="lyrics">
+                    <p class="placeholder">
+                        Calculate a special equation<br>
+                        to unlock a song...
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div class="notification" id="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
