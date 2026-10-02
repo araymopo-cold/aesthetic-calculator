@@ -9,9 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Load JavaScript after HTML is ready -->
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -29,9 +35,11 @@
         <div class="floating-object object-four">✦</div>
     </div>
 
+
     <!-- MAIN PAGE -->
     <main class="container">
 
+        <!-- CALCULATOR -->
         <section class="calculator-card">
 
             <div class="calculator-header">
@@ -40,83 +48,140 @@
                 <span>✦</span>
             </div>
 
+
             <!-- DISPLAY -->
             <div class="display">
                 <div id="previousDisplay"></div>
                 <div id="currentDisplay">0</div>
             </div>
 
+
             <!-- BUTTONS -->
             <div class="buttons">
 
-                <button class="function" data-action="clear">C</button>
-                <button class="function" data-action="delete">DEL</button>
-                <button class="operator" data-value="%">%</button>
-                <button class="operator" data-value="/">÷</button>
+                <button type="button" class="function" data-action="clear">
+                    C
+                </button>
 
-                <button data-value="7">7</button>
-                <button data-value="8">8</button>
-                <button data-value="9">9</button>
-                <button class="operator" data-value="*">×</button>
+                <button type="button" class="function" data-action="delete">
+                    DEL
+                </button>
 
-                <button data-value="4">4</button>
-                <button data-value="5">5</button>
-                <button data-value="6">6</button>
-                <button class="operator" data-value="-">−</button>
+                <button type="button" class="operator" data-value="%">
+                    %
+                </button>
 
-                <button data-value="1">1</button>
-                <button data-value="2">2</button>
-                <button data-value="3">3</button>
-                <button class="operator" data-value="+">+</button>
+                <button type="button" class="operator" data-value="/">
+                    ÷
+                </button>
 
-                <button class="zero" data-value="0">0</button>
-                <button data-value=".">.</button>
-                <button class="equals" data-action="equals">=</button>
+
+                <button type="button" data-value="7">7</button>
+                <button type="button" data-value="8">8</button>
+                <button type="button" data-value="9">9</button>
+
+                <button type="button" class="operator" data-value="*">
+                    ×
+                </button>
+
+
+                <button type="button" data-value="4">4</button>
+                <button type="button" data-value="5">5</button>
+                <button type="button" data-value="6">6</button>
+
+                <button type="button" class="operator" data-value="-">
+                    −
+                </button>
+
+
+                <button type="button" data-value="1">1</button>
+                <button type="button" data-value="2">2</button>
+                <button type="button" data-value="3">3</button>
+
+                <button type="button" class="operator" data-value="+">
+                    +
+                </button>
+
+
+                <button type="button" class="zero" data-value="0">
+                    0
+                </button>
+
+                <button type="button" data-value=".">
+                    .
+                </button>
+
+                <button type="button" class="equals" data-action="equals">
+                    =
+                </button>
 
             </div>
 
         </section>
+
 
 
         <!-- MUSIC / LYRICS PANEL -->
         <section class="music-card" id="musicCard">
 
             <div class="music-header">
+
                 <div>
                     <p class="small-label">NOW PLAYING</p>
-                    <h2 id="songTitle">No song selected</h2>
-                    <p id="artistName">Calculate something...</p>
+
+                    <h2 id="songTitle">
+                        No song selected
+                    </h2>
+
+                    <p id="artistName">
+                        Calculate something...
+                    </p>
                 </div>
 
-                <div class="music-icon">♫</div>
+                <div class="music-icon">
+                    ♫
+                </div>
+
             </div>
 
+
+            <!-- ALBUM ART -->
             <div class="album-art" id="albumArt">
                 <span>✦</span>
             </div>
 
+
+            <!-- AUDIO -->
             <audio id="audioPlayer" controls></audio>
 
+
+            <!-- LYRICS -->
             <div class="lyrics-box">
-                <div class="lyrics-title">✧ LYRICS ✧</div>
+
+                <div class="lyrics-title">
+                    ✧ LYRICS ✧
+                </div>
 
                 <div id="lyrics">
+
                     <p class="placeholder">
                         Calculate a special equation<br>
                         to unlock a song...
                     </p>
+
                 </div>
+
             </div>
 
         </section>
 
     </main>
 
+
+    <!-- NOTIFICATION -->
     <div class="notification" id="notification">
         <span id="notificationText"></span>
     </div>
-
-    <script src="script.js"></script>
 
 </body>
 </html>
